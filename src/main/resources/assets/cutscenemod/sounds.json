@@ -1,0 +1,9 @@
+{
+  "video_sound":{
+    "subtitles": "sounds.cutscenemod.video_sound",
+    "sounds": [
+      "cutscenemod:rick"
+    ]
+  }
+
+}
