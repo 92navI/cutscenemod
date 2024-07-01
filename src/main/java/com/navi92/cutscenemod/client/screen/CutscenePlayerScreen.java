@@ -2,12 +2,12 @@ package com.navi92.cutscenemod.client.screen;
 
 import com.navi92.cutscenemod.CutsceneMod;
 import com.navi92.cutscenemod.sound.ModSounds;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageWidget;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -19,15 +19,13 @@ public class CutscenePlayerScreen extends Screen {
     private static final Component TITLE =
             Component.translatable("gui." + CutsceneMod.MOD_ID + ".cutsceneplayer");
 
-    private final Player player;
-
     private final String folder;
 
     private ResourceLocation currentFrameTexture;
 
     private long currentFrame = 0;
 
-    private final long maxFrames;
+    private final int maxFrames;
 
     private final int imageWidth, imageHeight;
 
@@ -35,10 +33,9 @@ public class CutscenePlayerScreen extends Screen {
 
     private ImageWidget image;
 
-    public CutscenePlayerScreen(Player player, String folder, int imageWidth, int imageHeight, long maxFrames) {
+    public CutscenePlayerScreen(String name, int imageWidth, int imageHeight, int maxFrames) {
         super(TITLE);
-        this.player = player;
-        this.folder = "textures/cutscenes/" + folder + "/";
+        this.folder = "cutscenes/" + name + "/";
         this.imageWidth = imageWidth;
         this.imageHeight = imageHeight;
         this.maxFrames = maxFrames;
@@ -48,12 +45,18 @@ public class CutscenePlayerScreen extends Screen {
     protected void init() {
         super.init();
 
-        this.leftPos = (this.width - this.imageWidth) / 2;
-        this.topPos = (this.height - this.imageHeight) / 2;
+        this.leftPos = (this.width - (height*imageWidth)/imageHeight) / 2;
+        this.topPos = 0;
+
+//        this.leftPos = 0;
+//        this.topPos = 0;
 
         updateFrame();
 
-        player.playSound(ModSounds.VIDEO_SOUND.get(), 1f, 1f);
+        if (Minecraft.getInstance().player != null) {
+            Player player = Minecraft.getInstance().player;
+            player.playSound(ModSounds.RICK.get(), 1f, 1f);
+        }
     }
 
     @Override
@@ -87,16 +90,16 @@ public class CutscenePlayerScreen extends Screen {
         } else {
             this.renderDirtBackground(guiGraphics);
         }
-
     }
 
-    private void blit(@NotNull GuiGraphics graphics, ResourceLocation frame, int x, int y, int width, int height) {
+    private void blit(@NotNull GuiGraphics graphics, ResourceLocation frame,
+                      int x, int y, int imageWidth, int imageHeight) {
         graphics.blit(frame,
                 x, y,
                 0,
                 0F, 0F,
-                width, height,
-                width, height);
+                imageWidth, imageHeight,
+                (height*imageWidth)/imageHeight, height);
     }
 
     private void updateFrame() {

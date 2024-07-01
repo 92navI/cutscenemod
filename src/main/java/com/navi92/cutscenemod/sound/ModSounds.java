@@ -12,7 +12,7 @@ public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, CutsceneMod.MOD_ID);
 
-    public static final RegistryObject<SoundEvent> VIDEO_SOUND = registerSoundEvents("video_sound");
+    public static final RegistryObject<SoundEvent> RICK = registerSoundEvents("rick");
 
     private static RegistryObject<SoundEvent> registerSoundEvents(String name) {
         return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(
