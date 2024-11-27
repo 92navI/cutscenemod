@@ -6,10 +6,14 @@ import com.navi92.cutscenemod.item.ModCreativeModeTabs;
 import com.navi92.cutscenemod.item.ModItems;
 import com.navi92.cutscenemod.networking.PacketHandler;
 import com.navi92.cutscenemod.sound.ModSounds;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -21,7 +25,8 @@ import net.minecraftforge.server.command.ConfigCommand;
 import org.slf4j.Logger;
 import org.slf4j.event.Level;
 
-// The value here should match an entry in the META-INF/mods.toml file
+import java.io.File;
+
 @Mod(CutsceneMod.MOD_ID)
 public class CutsceneMod {
     public static final String MOD_ID = "cutscenemod";
@@ -57,6 +62,14 @@ public class CutsceneMod {
 
     @Mod.EventBusSubscriber(modid = MOD_ID)
     public static class ClientModEvents {
+
+        @SubscribeEvent
+        public static void onPlayerLoggerInEvent(PlayerEvent.PlayerLoggedInEvent event) {
+            if (!new File("./resourcepacks/cutscenepack/assets/cutscenemod/cutscenes/cutscenes.json").exists()) {
+                event.getEntity().sendSystemMessage(Component.literal("Cutscenes.json and/or the resourcepack does not exist").withStyle(ChatFormatting.RED));
+                CutsceneMod.LOGGER.error("The config file and/or the resourcepack does not exist");
+            }
+        }
 
         @SubscribeEvent
         public static void onCommandsRegister(RegisterCommandsEvent event) {

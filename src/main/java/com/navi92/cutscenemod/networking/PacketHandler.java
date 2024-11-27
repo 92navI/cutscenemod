@@ -4,7 +4,6 @@ import com.navi92.cutscenemod.CutsceneMod;
 import com.navi92.cutscenemod.networking.packets.S2COpenCutsceneGuiPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
@@ -13,6 +12,7 @@ public class PacketHandler {
     private static SimpleChannel INSTANCE;
 
     private static int packetId = 0;
+
     private static int id() {
         return packetId++;
     }
@@ -36,11 +36,11 @@ public class PacketHandler {
         INSTANCE.sendToServer(message);
     }
 
-    public static <MSG> void sendToPlayer (MSG message, ServerPlayer player) {
-        INSTANCE.send(PacketDistributor.PLAYER.with(()->player), message);
+    public static <MSG> void sendToPlayer(MSG message, ServerPlayer player) {
+        INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), message);
     }
 
-    public static <MSG> void sendToAllPlayers (MSG message) {
+    public static <MSG> void sendToAllPlayers(MSG message) {
         INSTANCE.send(PacketDistributor.ALL.noArg(), message);
     }
 }

@@ -5,9 +5,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 
 public class ClientHooks {
-    public static void openCutscenePlayerScreen(String name,
-                                                int imageWidth, int imageHeight, int maxFrames) {
+    public static void openCutscenePlayerScreen(String name) {
         Minecraft.getInstance()
-                .setScreen(new CutscenePlayerScreen(name, imageWidth, imageHeight, maxFrames));
+                .setScreen(new CutscenePlayerScreen(name));
     }
 }

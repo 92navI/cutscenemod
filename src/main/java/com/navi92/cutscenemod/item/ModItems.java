@@ -14,9 +14,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> CUTSCENE_VIEWER = ITEMS.register(
             "cutsceneviewer",
-            () -> new VideoViewerItem(new Item.Properties()));
+            () -> new VideoViewerItem(new Item.Properties().stacksTo(1)));
 
-    public static void register (IEventBus eventBus) {
+    public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
 }
