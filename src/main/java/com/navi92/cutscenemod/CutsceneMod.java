@@ -42,8 +42,6 @@ public class CutsceneMod {
         modEventBus.addListener(this::commonSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
-
-        modEventBus.addListener(this::addCreative);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -51,20 +49,11 @@ public class CutsceneMod {
         PacketHandler.register();
     }
 
-    public void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
-            event.accept(ModItems.CUTSCENE_VIEWER);
-        }
-    }
-
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event) {}
-
     @Mod.EventBusSubscriber(modid = MOD_ID)
-    public static class ClientModEvents {
+    public static class ModEvents {
 
         @SubscribeEvent
-        public static void onPlayerLoggerInEvent(PlayerEvent.PlayerLoggedInEvent event) {
+        public static void onPlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event) {
             if (!new File("./resourcepacks/cutscenepack/assets/cutscenemod/cutscenes/cutscenes.json").exists()) {
                 event.getEntity().sendSystemMessage(Component.literal("Cutscenes.json and/or the resourcepack does not exist").withStyle(ChatFormatting.RED));
                 CutsceneMod.LOGGER.error("The config file and/or the resourcepack does not exist");
@@ -77,8 +66,5 @@ public class CutsceneMod {
 
             ConfigCommand.register(event.getDispatcher());
         }
-
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {}
     }
 }
