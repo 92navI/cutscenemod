@@ -1,6 +1,6 @@
 package com.navi92.cutscenemod.networking;
 
-import com.navi92.cutscenemod.CutsceneMod;
+import com.navi92.cutscenemod.main.CutsceneMod;
 import com.navi92.cutscenemod.networking.packets.S2COpenCutsceneGuiPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;

@@ -4,11 +4,10 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.navi92.cutscenemod.CutsceneMod;
+import com.navi92.cutscenemod.main.CutsceneMod;
 import com.navi92.cutscenemod.networking.PacketHandler;
 import com.navi92.cutscenemod.networking.packets.S2COpenCutsceneGuiPacket;
 import com.navi92.cutscenemod.util.ConfigReader;
-import com.navi92.cutscenemod.util.CutsceneConfig;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
@@ -18,8 +17,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Objects;
 
 public class PlayCommand {
 

@@ -1,6 +1,6 @@
 package com.navi92.cutscenemod.client.screen;
 
-import com.navi92.cutscenemod.CutsceneMod;
+import com.navi92.cutscenemod.main.CutsceneMod;
 import com.navi92.cutscenemod.sound.ModSounds;
 import com.navi92.cutscenemod.util.ConfigReader;
 import com.navi92.cutscenemod.util.CutsceneConfig;
@@ -106,10 +106,10 @@ public class CutscenePlayerScreen extends Screen {
         super.onClose();
     }
 
-//    @Override
-//    public boolean shouldCloseOnEsc() {
-//        return false;
-//    }
+    @Override
+    public boolean shouldCloseOnEsc() {
+        return false;
+    }
 
     public void renderBackground(@NotNull GuiGraphics guiGraphics) {
         if (this.minecraft != null) {

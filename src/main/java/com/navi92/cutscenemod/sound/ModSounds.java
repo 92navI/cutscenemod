@@ -3,7 +3,7 @@ package com.navi92.cutscenemod.sound;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
-import com.navi92.cutscenemod.CutsceneMod;
+import com.navi92.cutscenemod.main.CutsceneMod;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
