@@ -1,0 +1,16 @@
+{
+  "rick": {
+    "width": 854,
+    "height": 480,
+    "length": 200,
+    "folder": "cutscenes/rick/",
+    "sound": "rick"
+  },
+  "intro": {
+    "width": 1280,
+    "height": 720,
+    "length": 177,
+    "folder": "cutscenes/spectral_intro/",
+    "sound": "intro"
+  }
+}

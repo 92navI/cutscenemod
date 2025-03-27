@@ -6,16 +6,15 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.navi92.cutscenemod.main.CutsceneMod;
 import com.navi92.cutscenemod.networking.PacketHandler;
+import com.navi92.cutscenemod.networking.PacketHandler1;
+import com.navi92.cutscenemod.networking.packets.S2CListCutscenesPacket;
 import com.navi92.cutscenemod.networking.packets.S2COpenCutsceneGuiPacket;
-import com.navi92.cutscenemod.util.ConfigReader;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
 import java.util.Collection;
 
 public class PlayCommand {
@@ -56,11 +55,8 @@ public class PlayCommand {
     }
 
     private int listCutscenes(@NotNull CommandContext<CommandSourceStack> command) {
-        try {
-        command.getSource().sendSystemMessage(Component.literal(ConfigReader.readJsonConfig().keySet().toString()));
-        } catch (IOException e) {
-            CutsceneMod.LOGGER.error("Unable to load cutscenes.json file.");
-        }
+
+        PacketHandler1.sendToPlayer(new S2CListCutscenesPacket(), command.getSource().getPlayer());
 
         return 0;
     }
