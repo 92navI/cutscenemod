@@ -6,6 +6,8 @@ public class CutsceneConfig {
     private int length;
     private String folder;
     private String sound;
+    private boolean moving;
+    private boolean esc;
 
     public int getWidth() {
         return width;
@@ -25,5 +27,13 @@ public class CutsceneConfig {
 
     public String getSound() {
         return sound;
+    }
+
+    public boolean isMoving() {
+        return moving;
+    }
+
+    public boolean canEsc() {
+        return esc;
     }
 }

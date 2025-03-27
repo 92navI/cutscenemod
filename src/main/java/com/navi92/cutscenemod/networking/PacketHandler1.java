@@ -9,7 +9,7 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
-public class PacketHandler {
+public class PacketHandler1 {
     private static SimpleChannel INSTANCE;
 
     private static int packetId = 0;
@@ -20,16 +20,16 @@ public class PacketHandler {
 
     public static void register() {
         INSTANCE = NetworkRegistry.ChannelBuilder.named(
-                        new ResourceLocation(CutsceneMod.MOD_ID, "main"))
+                        new ResourceLocation(CutsceneMod.MOD_ID, "main1"))
                 .serverAcceptedVersions(a -> true)
                 .clientAcceptedVersions(a -> true)
                 .networkProtocolVersion(() -> "1.0")
                 .simpleChannel();
 
-        INSTANCE.messageBuilder(S2COpenCutsceneGuiPacket.class, id())
-                .encoder(S2COpenCutsceneGuiPacket::encode)
-                .decoder(S2COpenCutsceneGuiPacket::new)
-                .consumerMainThread(S2COpenCutsceneGuiPacket::handle)
+        INSTANCE.messageBuilder(S2CListCutscenesPacket.class, id())
+                .encoder(S2CListCutscenesPacket::encode)
+                .decoder(S2CListCutscenesPacket::new)
+                .consumerMainThread(S2CListCutscenesPacket::handle)
                 .add();
     }
 
